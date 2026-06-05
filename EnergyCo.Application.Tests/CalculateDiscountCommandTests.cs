@@ -31,9 +31,9 @@ public class CalculateDiscountCommandTests
 
         var mockSet = new Mock<DbSet<Product>>();
         var products = new List<Product>
-            {
-                new Product { ProductId = "PRD01", ProductName = "Fuel", Category = Category.Fuel },
-            };
+        {
+            new Product { ProductId = "PRD01", ProductName = "Fuel", Category = Category.Fuel },
+        };
 
         var mockProductService = new Mock<IProductService>();
         mockProductService.Setup(c => c.GetProductDiscountPromotions(It.IsAny<List<string>>())).ReturnsAsync(products);
@@ -43,9 +43,12 @@ public class CalculateDiscountCommandTests
             CustomerId = Guid.NewGuid(),
             TransactionDate = new DateTime(2020, 01, 6),
             Basket = new List<CalculateDiscountCommandChild>
-                        {
-                            new CalculateDiscountCommandChild(){ ProductId = "abc", Quantity = 5, UnitPrice = 2 }
-                        }
+            {
+                new CalculateDiscountCommandChild
+                {
+                    ProductId = "abc", Quantity = 5, UnitPrice = 2
+                }
+            }
 
         };
         var applicationDbContext = new Mock<IApplicationDbContext>();
@@ -61,37 +64,35 @@ public class CalculateDiscountCommandTests
     [TestCase("2020-01-05", 20, Category.Fuel)]
     [TestCase("2020-02-05", 30, Category.Fuel)]
     [TestCase("2020-03-01", 40, Category.Shop)]
-    public async Task CalculateDiscountCommand_Should_CalulatePoints_Given_ValidData(DateTime transactionDate,
-                                                                                                        decimal expectedPoints,
-                                                                                                        Category category)
+    public async Task CalculateDiscountCommand_Should_CalulatePoints_Given_ValidData(DateTime transactionDate, decimal expectedPoints, Category category)
     {
         var mockSet = new Mock<DbSet<Product>>();
         var products = new List<Product>
-            {
-                new Product { ProductId = "PRD01", ProductName = "Fuel", Category = category },
-            };
+        {
+            new Product { ProductId = "PRD01", ProductName = "Fuel", Category = category },
+        };
 
         var pointsPromotions = new List<PointsPromotion>
-            {
-                new PointsPromotion { PointsPromotionId = "PP001",
-                                      PromotionName = "New Year Promo",
-                                      StartDate = new DateTime(2020,01,01),
-                                      EndDate = new DateTime(2020,01,30),
-                                      Category = Category.Any,
-                                      PointsPerDollar = 2},
-                new PointsPromotion { PointsPromotionId = "PP002",
-                                      PromotionName = "Fuel Promo",
-                                      StartDate = new DateTime(2020,02,05),
-                                      EndDate = new DateTime(2020,02,15),
-                                      Category = Category.Fuel,
-                                      PointsPerDollar = 3},
-                new PointsPromotion { PointsPromotionId = "PP003",
-                                      PromotionName = "Shop Promo",
-                                      StartDate = new DateTime(2020,03,01),
-                                      EndDate = new DateTime(2020,03,20),
-                                      Category = Category.Shop,
-                                      PointsPerDollar = 4}
-            };
+        {
+            new PointsPromotion { PointsPromotionId = "PP001",
+                                    PromotionName = "New Year Promo",
+                                    StartDate = new DateTime(2020,01,01),
+                                    EndDate = new DateTime(2020,01,30),
+                                    Category = Category.Any,
+                                    PointsPerDollar = 2},
+            new PointsPromotion { PointsPromotionId = "PP002",
+                                    PromotionName = "Fuel Promo",
+                                    StartDate = new DateTime(2020,02,05),
+                                    EndDate = new DateTime(2020,02,15),
+                                    Category = Category.Fuel,
+                                    PointsPerDollar = 3},
+            new PointsPromotion { PointsPromotionId = "PP003",
+                                    PromotionName = "Shop Promo",
+                                    StartDate = new DateTime(2020,03,01),
+                                    EndDate = new DateTime(2020,03,20),
+                                    Category = Category.Shop,
+                                    PointsPerDollar = 4}
+        };
 
         var mockProductService = new Mock<IProductService>();
         mockProductService.Setup(c => c.GetProductDiscountPromotions(It.IsAny<List<string>>())).ReturnsAsync(products);
@@ -102,10 +103,9 @@ public class CalculateDiscountCommandTests
             CustomerId = Guid.NewGuid(),
             TransactionDate = transactionDate,
             Basket = new List<CalculateDiscountCommandChild>
-                        {
-                            new CalculateDiscountCommandChild(){ ProductId = "PRD01", Quantity = 5, UnitPrice = 2 }
-                        }
-
+            {
+                new CalculateDiscountCommandChild(){ ProductId = "PRD01", Quantity = 5, UnitPrice = 2 }
+            }
         };
 
         var mediator = new Mock<IMediator>();
@@ -119,9 +119,7 @@ public class CalculateDiscountCommandTests
     [TestCase("2020-01-05", 2.0, Category.Fuel)]
     [TestCase("2020-02-21", 0.0, Category.Fuel)]
     [TestCase("2020-03-06", 1.5, Category.Fuel)]
-    public async Task CalculateDiscountCommand_Should_CalulateDiscount_Given_ValidData(DateTime transactionDate,
-                                                                                                decimal expectedPoints,
-                                                                                                Category category)
+    public async Task CalculateDiscountCommand_Should_CalulateDiscount_Given_ValidData(DateTime transactionDate, decimal expectedPoints, Category category)
     {
         var mockSet = new Mock<DbSet<Product>>();
         var products = new List<Product>
@@ -146,26 +144,26 @@ public class CalculateDiscountCommandTests
             };
 
         var pointsPromotions = new List<PointsPromotion>
-            {
-                new PointsPromotion { PointsPromotionId = "PP001",
-                                      PromotionName = "New Year Promo",
-                                      StartDate = new DateTime(2020,01,01),
-                                      EndDate = new DateTime(2020,01,30),
-                                      Category = Category.Any,
-                                      PointsPerDollar = 2},
-                new PointsPromotion { PointsPromotionId = "PP002",
-                                      PromotionName = "Fuel Promo",
-                                      StartDate = new DateTime(2020,02,05),
-                                      EndDate = new DateTime(2020,02,15),
-                                      Category = Category.Fuel,
-                                      PointsPerDollar = 3},
-                new PointsPromotion { PointsPromotionId = "PP003",
-                                      PromotionName = "Shop Promo",
-                                      StartDate = new DateTime(2020,03,01),
-                                      EndDate = new DateTime(2020,03,20),
-                                      Category = Category.Shop,
-                                      PointsPerDollar = 4}
-            };
+        {
+            new PointsPromotion { PointsPromotionId = "PP001",
+                                    PromotionName = "New Year Promo",
+                                    StartDate = new DateTime(2020,01,01),
+                                    EndDate = new DateTime(2020,01,30),
+                                    Category = Category.Any,
+                                    PointsPerDollar = 2},
+            new PointsPromotion { PointsPromotionId = "PP002",
+                                    PromotionName = "Fuel Promo",
+                                    StartDate = new DateTime(2020,02,05),
+                                    EndDate = new DateTime(2020,02,15),
+                                    Category = Category.Fuel,
+                                    PointsPerDollar = 3},
+            new PointsPromotion { PointsPromotionId = "PP003",
+                                    PromotionName = "Shop Promo",
+                                    StartDate = new DateTime(2020,03,01),
+                                    EndDate = new DateTime(2020,03,20),
+                                    Category = Category.Shop,
+                                    PointsPerDollar = 4}
+        };
 
         var mockProductService = new Mock<IProductService>();
         mockProductService.Setup(c => c.GetProductDiscountPromotions(It.IsAny<List<string>>())).ReturnsAsync(products);
@@ -176,10 +174,9 @@ public class CalculateDiscountCommandTests
             CustomerId = Guid.NewGuid(),
             TransactionDate = transactionDate,
             Basket = new List<CalculateDiscountCommandChild>
-                        {
-                            new CalculateDiscountCommandChild(){ ProductId = "PRD02", Quantity = 5, UnitPrice = 2 }
-                        }
-
+            {
+                new CalculateDiscountCommandChild(){ ProductId = "PRD02", Quantity = 5, UnitPrice = 2 }
+            }
         };
 
         var mediator = new Mock<IMediator>();
