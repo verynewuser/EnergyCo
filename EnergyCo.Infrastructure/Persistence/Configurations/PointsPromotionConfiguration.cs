@@ -9,8 +9,8 @@ public class PointsPromotionConfiguration: IEntityTypeConfiguration<PointsPromot
     public void Configure(EntityTypeBuilder<PointsPromotion> builder)
     {
         builder.Property(t => t.PointsPromotionId)
-               .HasMaxLength(10)
-               .HasColumnType("char");
+            .HasMaxLength(10)
+            .HasColumnType("char");
 
         builder.Property(t => t.PointsPerDollar)
             .IsRequired()

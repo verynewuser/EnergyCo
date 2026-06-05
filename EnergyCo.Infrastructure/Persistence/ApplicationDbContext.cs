@@ -11,8 +11,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<PointsPromotion> PointsPromotions { get; set; }
     public DbSet<DiscountPromotion> DiscountPromotions { get; set; }
 
-    public ApplicationDbContext(DbContextOptions options)
-     : base(options)
+    public ApplicationDbContext(DbContextOptions options) : base(options)
     {
     }
 
