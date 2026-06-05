@@ -7,6 +7,6 @@ public class CalculateDiscountResponseDto
     public DateTime TransactionDate { get; set; }
     public decimal TotalAmount { get; set; }
     public decimal DiscountApplied { get; set; }
-    public decimal GrandTotal { get; set; }
+    public decimal GrandTotal { get { return TotalAmount - DiscountApplied; } }
     public decimal PointsEarned { get; set; }
 }

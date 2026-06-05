@@ -12,7 +12,7 @@ public class CalculateDiscountCommand : IRequest<CalculateDiscountResponseDto>
     public Guid CustomerId { get; set; }
     public string? LoyaltyCard { get; set; }
     public DateTime TransactionDate { get; set; }
-    public List<CalculateDiscountCommandChild> Basket { get; set; }
+    public required List<CalculateDiscountCommandChild> Basket { get; set; }
 }
 
 public class CalculateDiscountCommandHandler : IRequestHandler<CalculateDiscountCommand, CalculateDiscountResponseDto>
@@ -57,19 +57,17 @@ public class CalculateDiscountCommandHandler : IRequestHandler<CalculateDiscount
 
         ValidateProductIds(productIds, products.Select(p => p.ProductId).ToList());
         
-        CalculateDiscountResponseDto resp = new CalculateDiscountResponseDto()
+        var response = new CalculateDiscountResponseDto
         {
             CustomerId = request.CustomerId,
             LoyaltyCard = request.LoyaltyCard,
             TransactionDate = request.TransactionDate,
+            PointsEarned = await CalculatePointsEarned(request, products),
+            TotalAmount = request.Basket.Sum(p => Math.Round(p.UnitPrice * p.Quantity, 2)),
+            DiscountApplied = CalculateDiscount(request, products)
         };
 
-        resp.PointsEarned = await CalculatePointsEarned(request, products);
-        resp.TotalAmount = request.Basket.Sum(p => Math.Round(p.UnitPrice * p.Quantity, 2));
-        resp.DiscountApplied = CalculateDiscount(request, products);
-        resp.GrandTotal = resp.TotalAmount - resp.DiscountApplied;
-
-        return resp;
+        return response;
     }
 
     private bool ValidateProductIds(List<string> productIds, List<string> products)
