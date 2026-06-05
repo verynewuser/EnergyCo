@@ -22,9 +22,9 @@ It will return the promotions.
 * For unit testing I chose NUnit and Moq libraries. (I have experience with xunit and Substitute libraries as well )
 
 ## Potential Improvements
-* Caching can be used to improve performance. I reckon the discounts and promotions are not changed every day, so instead of DB queries against every API call, I can implement a caching layer to return relevant discounts and promotions for products.
+* Caching can be used to improve performance. I reckon the discounts and promotions are not changed every day, so instead of DB queries against every API call, I can implement a caching layer to return relevant discounts and promotions for products. We can go with either local caching or distributed caching.
 * I didn't see any merit of employing an event-driven architecture here because the business requirement is simple synchronous request-response.
 * Logging can be improved further in production environments.
-* For further performance boost, JSON endpoints can be swapped with GraphQL endpoints, but the data sets are not huge in this case.
+* For further performance boost, JSON endpoints can be swapped with GraphQL endpoints, but the data sets are not huge in this case. For larger sets, paging can be implemented.
 * Authentication and athorizaton can be implemented in the API to secure it. We can use OAuth and JWT with role-based auth in it.
 * The API can be containerized using Docker
