@@ -10,7 +10,7 @@ namespace EnergyCo.Application.Commands;
 public class CalculateDiscountCommand : IRequest<CalculateDiscountResponseDto>
 {
     public Guid CustomerId { get; set; }
-    public string LoyaltyCard { get; set; }
+    public string? LoyaltyCard { get; set; }
     public DateTime TransactionDate { get; set; }
     public List<CalculateDiscountCommandChild> Basket { get; set; }
 }

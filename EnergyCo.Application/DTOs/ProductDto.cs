@@ -7,8 +7,8 @@ namespace EnergyCo.Application.DTOs;
 
 public class ProductDto: IMapFrom<Product>
 {
-    public string ProductId { get; set; }
-    public string ProductName { get; set; }
+    public required string ProductId { get; set; }
+    public required string ProductName { get; set; }
     public decimal UnitPrice { get; set; }
     public Category Category { get; set; }
     public List<DiscountPromotionDto> DiscountPromotions{ get; set; }
