@@ -19,7 +19,7 @@ It will return the promotions.
 * I implemented `CustomDateTimeConverter` because the provided dates are in "dd-MMM-yyyy" format, not the by default recognized ISO8601 format.
 * AutoMapper is used for seamless mapping between entities and DTOs (I faced an issue with it and wrote a developer comment there)
 * FluentValidation library is used for input data validation
-* For unit testing I chose NUnit and Moq libraries. (I have experience with xunit and Substitute libraries as well )
+* For unit testing I chose XUnit and Moq libraries. (I have experience with nunit and Substitute libraries as well )
 
 ## Potential Improvements
 * Caching can be used to improve performance. I reckon the discounts and promotions are not changed every day, so instead of DB queries against every API call, I can implement a caching layer to return relevant discounts and promotions for products. We can go with either local caching or distributed caching.
