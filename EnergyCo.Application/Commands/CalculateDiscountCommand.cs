@@ -29,10 +29,10 @@ public class CalculateDiscountCommandHandler : IRequestHandler<CalculateDiscount
 
     public async Task<CalculateDiscountResponseDto> Handle(CalculateDiscountCommand request, CancellationToken cancellationToken)
     {
-        List<string> productIds = request.Basket.Select(b => b.ProductId).ToList();
+        var productIds = request.Basket.Select(b => b.ProductId).ToList();
         var productEntities = await _calculateDiscountService.GetProductDiscountPromotions(productIds);
 
-        List<ProductDto> products = productEntities.Select(e => new ProductDto
+        var products = productEntities.Select(e => new ProductDto
         {
             Category = e.Category,
             ProductId = e.ProductId.Trim(),
@@ -72,7 +72,7 @@ public class CalculateDiscountCommandHandler : IRequestHandler<CalculateDiscount
 
     private bool ValidateProductIds(List<string> productIds, List<string> products)
     {
-        List<string> inValidProductIds = productIds.Except(products).ToList();
+        var inValidProductIds = productIds.Except(products).ToList();
 
         if (inValidProductIds.Count() == 0)
         {
