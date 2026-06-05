@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Tests/">
+    <Project Path="EnergyCo.Application.Tests/EnergyCo.Application.Tests.csproj" />
+  </Folder>
+  <Project Path="EnergyCo.Api/EnergyCo.Api.csproj" />
+  <Project Path="EnergyCo.Application/EnergyCo.Application.csproj" />
+  <Project Path="EnergyCo.Domain/EnergyCo.Domain.csproj" />
+  <Project Path="EnergyCo.Infrastructure/EnergyCo.Infrastructure.csproj" />
+</Solution>
