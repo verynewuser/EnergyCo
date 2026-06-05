@@ -16,6 +16,7 @@ It will return the promotions.
 * For interactive API documentation I used Scalar instead of Swagger. Scalar is a modern alternate to Swagger, and recommended by Microsoft.
 * EntityFramework Core is used as an ORM tool to connect with the database.
 * CQRS design pattern was used to segregate commands and queries, with the help of MediatR library
+* I implemented `CustomDateTimeConverter` because the provided dates are in "dd-MMM-yyyy" format, not the by default recognized ISO8601 format.
 * AutoMapper is used for seamless mapping between entities and DTOs (I faced an issue with it and wrote a developer comment there)
 * FluentValidation library is used for input data validation
 * For unit testing I chose NUnit and Moq libraries. (I have experience with xunit and Substitute libraries as well )
