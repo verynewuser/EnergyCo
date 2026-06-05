@@ -1,1 +1,21 @@
 # EnergyCo
+
+## Instructions to run
+This a .NET 10 solution created with Visual Studio 2026 and a Clean Architecture tempalte. When the API project is run (or deployed), it exposes three endpoints to fetch products and discounts details. The project needs a database to conenct. The connection string must be updated in `appsettings.json` file before running the project. When run first time, the project will create seeding tables. Running the project (through F5 etc.) will appear a Scalar UI page, which is a modern alternative to Swagger UI.
+
+## API endpoints
+### POST `/api/v1/DiscountController`
+The endpoint takes JSON input containing customer's cart data, and returns the earned points & discount.
+### GET `/api/v1/Product`
+It will return a list of products and the relevant discounts
+### GET `/api/v1/PointsPromotion`
+It will return the promotions.
+
+## Technical Details
+* The project is built using .NET 10 and Visual Studio 2026. I used SQL Server Express editon on my PC.
+* For interactive API documentation I used Scalar instead of Swagger. Scalar is a modern alternate to Swagger, and recommended by Microsoft.
+* EntityFramework Core is used as an ORM tool to connect with the database.
+* CQRS design pattern was used to segregate commands and queries, with the help of MediatR library
+* AutoMapper is used for seamless mapping between entities and DTOs (I faced an issue with it and wrote a developer comment there)
+* FluentValidation library is used for input data validation
+* For unit testing I chose NUnit and Moq libraries. (I have experience with xunit and Substitute libraries as well )
